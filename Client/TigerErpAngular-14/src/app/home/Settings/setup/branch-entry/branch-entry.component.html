@@ -1,0 +1,111 @@
+<section class="mt-5 mb-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-7">
+                <div class="input-group">
+                    <input id="house" class="form-control" type="text" name="search" 
+                        autocomplete="off" placeholder="search Godown Name,Branch Name">
+                </div>
+            </div>
+                <div class="col-md-2">
+                </div>
+            <div class="col-md-3">
+                <button class="btn btn-success mx-2" (click)="openModalForSave(modalForSave)"
+                    style="padding-left:8%;padding-right:8%; background-color: #256D85;"> <i class="fa-solid fa-plus"></i>
+                    Add
+                </button>
+                <button class="btn btn-success mx-2" > <i class="fa-regular fa-eye"></i> Pdf View</button>
+            </div>
+        </div>
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>SL NO.</th>
+                    <th >Branch Name</th>
+                    <th >Short Name</th>
+                    <th >Contact No</th>
+                    <th >Address</th>
+                    <th >Type</th>
+                    <th style="width: 80px;">Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</section>
+
+<section>
+  <ng-template #modalForSave>
+    <div class="container">
+        <form [formGroup]="branchEntryFrom">
+            <div class="card-header text-center pt-4 pb-4" style="border:none ;background-color:#F2F2F2 ">
+                <h3>Branch Entry</h3>
+            </div>
+            <div class="card-body" style="background-color:#F2F2F2">
+                <div class="row mb-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <label> Branch Name</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input formControlName="name" class="form-control" type="text" placeholder="Enter Branch Name">
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <label> Short Name</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input formControlName="shortName" class="form-control" type="text" placeholder="Enter Branch Short Name">
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <label>Contact No</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input formControlName="contactNo" class="form-control" type="text" placeholder="Enter Contact No">
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <label>Address</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input formControlName="address" class="form-control" type="text" placeholder="Enter Address">
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <label>Select Branch Type</label>
+                    </div>
+                    <div class="col-md-7">
+                        <ng-select formControlName="type" [items]="typelst"
+                        bindLabel="name" bindValue="id" [placeholder]="'Select type'">
+                        </ng-select>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+            <div class="row mt-4 mb-4">
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-7 text-start">
+                    <button class="btn btn-success" (click)="saveBranch()" style="padding-left:8%;padding-right:8%;"> Save</button>
+                    <button class="btn btn-primary" style="margin-left:1%; padding-left:8%;padding-right:8%;">
+                        Reset</button>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </form>
+    </div>
+  </ng-template>
+</section>
