@@ -1,0 +1,153 @@
+<div class="container">
+    <div class="row ">
+
+        <div class="col-md-3">
+            <button class="btn btn-success" (click)="openModalForSave(modalForSave)"
+                style="padding-left:8%;padding-right:8%; background-color: #256D85;"> <i class="fa-solid fa-plus"></i>
+                Add </button>
+
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-success" (click)="tableListPdfView()"> <i class="fa-regular fa-eye"></i> Pdf View
+            </button>
+
+        </div>
+        <div class="col-md-7">
+            <div class="input-group">
+                <input id="house" class="form-control" type="text" name="search" [(ngModel)]="searchText"
+                    autocomplete="off" placeholder="search Name, description">
+            </div>
+        </div>
+
+    </div>
+
+    <hr>
+    <div #tableListPdf class="tableListPdf" style="max-height: 450px; overflow:scroll;width: 100%;">
+        <table id="example" class="table table-striped" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let brand of lstbrandModel | filter:searchText">
+                    <td>{{brand.brandName}}</td>
+                    <td>{{brand.description}}</td>
+                    <td><span class="text-success" *ngIf="brand.status===1"> <i class="fa fa-check"
+                                aria-hidden="true"></i> Active</span>
+                        <span class="text-danger" *ngIf="brand.status===2"> <i class="fa fa-times"
+                                aria-hidden="true"></i> Deactived</span>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <button class="btn btn-sm btn-info" (click)="editProductById(brand.id,modalForSave)"><i
+                                        class="fa-solid fa-pen-to-square"></i></button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-sm btn-danger" (click)="delete(brand.id, deleteModal)"><i
+                                        class="fa-solid fa-trash"></i></button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-sm btn-success" (mouseover)="changeById(brand.id)"
+                                    (click)="viewPrint(brand.id)"><i class="fa-regular fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </td>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div #content class="content" *ngIf="isShow">
+    <h1>Book Bank</h1>
+    <h3>New Yourk,USA</h3>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">IsActive</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{brandModel!.brandName}}</td>
+                <td>{{brandModel!.description}}</td>
+                <td>{{brandModel!.isActive}}</td>
+                <td>{{brandModel!.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #modalForSave>
+    <div class="row">
+        <div class="card  text-center" style="border:none">
+            <form [formGroup]="publisherEntryFrom">
+                <div class="card-header text-center pt-4 pb-4" style="border:none ;background-color:#F2F2F2 ">
+                    <h3>Publisher Entry</h3>
+                </div>
+                <div class="card-body" style="background-color:#F2F2F2">
+                    <div class="row">
+                        <div class="col-md-3 text-start">
+                            <Label>Publisher Name</Label>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="form-control" formControlName="brandName" type="text">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-3 text-start">
+                            <Label>Discription</Label>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="form-control" formControlName="description" type="text">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-3 text-start">
+                            <Label>Status</Label>
+                        </div>
+                        <div class="col-md-8">
+                            <!-- 
+                            <ng-select formControlName="status" [items]="lstStatus" bindLabel="value" bindValue="key"
+                                [placeholder]="'Select Activity'"></ng-select> -->
+
+                            <select name="Status" class="form-control" formControlName="status">
+                                <option *ngFor="let status of lstStatus" [value]="status.key">{{status.value}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 ">
+                        <div class="col-md-3 ">
+                        </div>
+                        <div class="col-md-8 text-start">
+                            <button class="btn btn-success" (click)="savePublisher()"
+                                style="padding-left:8%;padding-right:8%;"> Save</button>
+                            <button class="btn btn-primary" (click)="reset()"
+                                style="margin-left:1%; padding-left:8%;padding-right:8%;">
+                                Reset</button>
+                            <button class="btn btn-primary" (click)="makePdf()"
+                                style="margin-left:1%; padding-left:8%;padding-right:8%;">
+                                PrintView</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #deleteModal>
+    <app-delete-confirmation [rowId]="selectedItemId" (onConfirmedId)="removeDetailFormRow($event)">
+    </app-delete-confirmation>
+</ng-template>

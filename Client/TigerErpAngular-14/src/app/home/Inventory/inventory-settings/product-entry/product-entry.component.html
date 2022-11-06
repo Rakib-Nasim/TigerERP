@@ -1,0 +1,175 @@
+<section class="mt-5 mb-5">
+    <div class="container">
+        
+        <div class="row ">
+            <div class="col-md-7">
+                <div class="input-group">
+                    <input id="house" class="form-control" type="text" name="search" 
+                        autocomplete="off" placeholder="search Godown Name,Branch Name">
+                </div>
+            </div>
+                <div class="col-md-2">
+                </div>
+            <div class="col-md-3">
+                    <button class="btn btn-success mx-2" (click)="openModalForSave(Addproduct)"
+                        style="padding-left:8%;padding-right:8%; background-color: #256D85;"> <i class="fa-solid fa-plus"></i>
+                        Add
+                    </button>
+                    <button class="btn btn-success mx-2" > <i class="fa-regular fa-eye"></i> Pdf View
+                    </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<ng-template #Addproduct>
+    <div class="container">
+        <h4 class="card-header text-center p-1 mt-2 pt-4 pb-4" style="border:none;" *ngIf="compId ==202">Book Entry</h4>
+        <h4 class="card-header text-center p-1 pt-4 pb-4" style="border:none;" *ngIf="compId !=202">Product Entry</h4>
+        <form [formGroup]="bookEntryForm" style="margin:5%" >
+            <div class="form-group row mb-3" >
+                <label for="catagory" class="col-md-3">Category <span class="text-danger">*</span></label>
+                <div class="col-md-8">
+                    <div style="background-color:white ! important"> 
+                        <ng-multiselect-dropdown formControlName="productCategories" [placeholder]="'Select Category'" [settings]="dropdownSettings"
+                            [data]="lstcategory" [(ngModel)]="categoryItems">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="name" class=" col-md-3 ">Product Name<span class="text-danger">*</span></label>
+                <div class="col-md-8">
+                    <input formControlName="name" type="text" class="form-control" placeholder="Enter Product Name">
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="description" class=" col-md-3 ">Description</label>
+                <div class="col-md-8">
+                    <textarea  formControlName="description" type="text-area" class="form-control" placeholder="Enter Description"></textarea>
+                </div>
+            </div>
+            <div class="form-group row mb-3">
+                <label for="model" class="col-md-3" *ngIf="compId==202">Author</label>
+                <label for="model" class="col-md-3" *ngIf="compId!=202">Color</label>
+                <div class="col-md-8">
+                    <div style="background-color:white ! important">
+                        <ng-multiselect-dropdown [(ngModel)]="authorItems" formControlName="productColor" [placeholder]="'Select'"
+                        [settings]="ColorSetting" [data]="lstColorModel">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="form-group row mb-3">
+                <label for="model" class="col-md-3">Origin</label>
+                <div class="col-md-8">
+                    <ng-select  formControlName="country"
+                    [items]="lstStatus" bindLabel="value"
+                    bindValue="key" placeholder="Select Your Country"></ng-select>
+                </div>
+            </div>
+    
+    
+            <div class="form-group row mb-3">
+                <label for="brand" class="col-md-3" *ngIf="compId==202">Publisher</label>
+                <label for="brand" class="col-md-3"*ngIf="compId!=202">Brand</label>
+                <div class="col-md-8">
+                    <div style="background-color:white ! important">
+                        <ng-select formControlName="brandId" [items]="lstPublisher"
+                            bindLabel="brandName" bindValue="id" [placeholder]="'Select Publisher'"></ng-select>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="form-group row mb-3">
+                <label for="costPrice" class=" col-md-3 ">Unit Of Measure</label>
+                <div class="col-md-8">
+                    <ng-select formControlName="unitId" [items]="lstUnitModel"  bindLabel="unitName"
+                    bindValue="id" [placeholder]="'Select Unit'"></ng-select>
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label for="costPrice" class=" col-md-3 ">Unit Of Conversion</label>
+                <div class="col-md-8">
+                    <div class="row data-table" style="max-height: 200px;">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>UOM</th>
+                                    <th>Factor</th>
+                                    <th>Bill</th>
+                                    <th>Challan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr *ngFor="let productUnitConv of productUnitFormArray.controls; let i=index" [formGroup]="productUnitConv"  >
+                                    <td>{{productUnitConv.value.unitName}}</td>
+                                    <td class="factor">
+                                        <input formControlName="factor" type="number" class="form-control" placeholder="0.00" />
+                                    </td>
+                                    <td>
+                                        <input (change)="onCheck(i,'isDefaultBillUnit',$any($event.target)?.checked)" formControlName="isDefaultBillUnit" type="checkbox" />
+                                    </td>
+                                    <td>
+                                        <input (change)="onCheck(i,'isDefaultChallanUnit',$any($event.target)?.checked)" formControlName="isDefaultChallanUnit" type="checkbox" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="form-group row mb-3">
+                <label for="costPrice" class=" col-md-3 ">Cost Price</label>
+                <div class="col-md-8">
+                    <input formControlName="costPrice" type="number" class="form-control" placeholder="00.00">
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label for="costPrice" class=" col-md-3 ">Sales Price</label>
+                <div class="col-md-8">
+                    <input formControlName="salePrice" type="number" class="form-control" placeholder="00.00">
+                </div>
+            </div>
+    
+            <div class="form-group row mb-3">
+                <label for="salesPrice" class=" col-md-3 ">Re-order Level</label>
+                <div class="col-md-8">
+                    <input formControlName="order" type="number" class="form-control" placeholder="00.00">
+                </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label for="salesPrice" class=" col-md-3 ">Reference Product List</label>
+                <div class="col-md-8">
+                    <ng-select formControlName="productType" placeholder="Select Product"></ng-select> 
+                </div>
+            </div>
+    
+            <div class="form-group row mb-3">
+                <label class="form-group col-md-3"> Status<i >*</i> </label>
+                <div class="col-md-8 ">
+                    <select name="status" class="form-control" formControlName="status">
+                        <option *ngFor="let status of lstStatus" [value]="status.key">{{status.value}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-9 mt-4" >
+                    <button type="submit" class="btn btn-success ml-2" style="padding-left:5%; padding-right:5%"
+                    (click)="saveProduct()"
+                    > Save</button>
+                    <button type="reset" class="btn btn-info" style="padding-left:5%; padding-right:5%;margin-left: 1%;">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

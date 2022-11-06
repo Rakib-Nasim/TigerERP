@@ -1,0 +1,54 @@
+<div class="input-group">
+    <ng-select [(ngModel)]="productId" [ngStyle]="{'width': width}" style="text-align: left;" name="productId" (change)="onSelect($event)" [items]="filtered" bindLabel="name" bindValue="id" [disabled]="IsDisabled" placeholder="Select Product" [id]="productTabId">
+    </ng-select>
+    <div  class="input-group-append">
+        <button type="button" (click)="openSearchModal(searchModal)" class="btn btn-sm btn-primary" [id]="productSearchBtnId"><span
+        class="fa fa-search"></span></button>
+    </div>
+</div>
+
+<ng-template #searchModal>
+    <div class="card" (keydown)="onEnterOrTabKeyDown($event,'productTabId')">
+        <div class="card-header py-1">
+            <h4 class="mb-0 text-center">
+                Search Product
+                <div (click)="closeModal()" class="btn btn-sm btn-danger float-right"><span class="fa fa-times"></span></div>
+            </h4>
+
+        </div>
+        <div class="card-body p-1 m-1">
+            <div class="row mx-3 mb-1">
+                <div class="input-group">
+                    <input type="text" autocomplete="off" (keydown)="search($event);" class="form-control" placeholder="Search by Name" [id]="'txtSearch'">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-sm btn-primary"><span class="fa fa-search" [tabindex]="-1"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="filtered.length>0" class="data-table m-0">
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th class="tc-80">#SN</th>
+                            <th class="tc-250">Name</th>
+                            <th class="tc-100">Price</th>
+                            <th class="tc-80">Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of filtered; let i=index" (click)="onSelect(product)" [id]="'row'+i">
+                            <td class="tc-80">{{i+1}}</td>
+                            <td class="tc-250">{{product.name}}</td>
+                            <td class="tc-100 text-right">{{product.salePrice}}</td>
+                            <td class="tc-80">
+                                <button (click)="onSelect(product)" (keyup)="search($event)" [id]="'btnSelectProduct'+i" class="btn btn-sm btn-primary">Select</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+ 
+        </div>
+    </div>
+    </div>
+</ng-template>
+

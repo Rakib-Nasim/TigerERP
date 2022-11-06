@@ -1,0 +1,155 @@
+<!-- <section>
+    <div class="container">
+       <div class="card" style="border:none ;">
+          <div class="card-header text-center" style="border:none ;">
+            <h3>{{title}}</h3>
+          </div>
+          <div class="card-body">
+             <form>
+
+             </form>
+          </div>
+       </div>
+    </div>
+</section> -->
+<section class="mt-5 mb-5">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-7">
+                <div class="input-group">
+                    <input id="house" class="form-control" type="text"  name="search" 
+                        autocomplete="off" placeholder="search Godown Name,Branch Name">
+                </div>
+            </div>
+                <div class="col-md-2">
+                </div>
+            <div class="col-md-3">
+                    <button class="btn btn-success mx-2" (click)="openModalForSave(modalForSave)"
+                        style="padding-left:8%;padding-right:8%; background-color: #256D85;"> <i class="fa-solid fa-plus"></i>
+                        Add
+                    </button>
+                    <button class="btn btn-success mx-2" > <i class="fa-regular fa-eye"></i> Pdf View
+                    </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #modalForSave> 
+    <div class="container mt-4">
+        <div class="card-header text-center mb-4" style="border:none;"> 
+            <h3>Account Group Creation</h3>
+        </div>
+        <form [formGroup]="lowerEntryForm" class="p-4">
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label><i class="text-danger" >*</i>Under Group</label>
+                </div>
+                <div class="col-md-8">
+                    <ng-select [items]="lstaccountMidGroup" bindLabel="groupName" bindValue="midGroupId"
+                     formControlName="midGroupId" placeholder="Select Under Group"></ng-select>
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label><i class="text-danger">*</i>Parent Group</label>
+                </div>
+                <div class="col-md-8">
+                    <ng-select formControlName="parentId" [items]="lstlowerGroup"
+                    bindLabel="" bindValue=""
+                     placeholder="Select Under Group"></ng-select>
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label><i class="text-danger" >*</i>Group Name/Code</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" formControlName="groupName" placeholder="Select Under Group">
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label>Group Alias</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" formControlName="groupNameAlias" placeholder="Select Under Group">
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label>Bal. Sheet Caption</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control"  formControlName="balancesheetCaption" placeholder="Bal. Sheet Caption">
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label>Profit/Loss Caption</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" formControlName="profitLossCaption"  placeholder="Profit/Loss Caption">
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label>Fundflow Caption</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" formControlName="fundFlowCaption" placeholder="Fundflow Caption">
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label>Cashflow Caption</label>
+                </div>
+                <div class="col-md-8">
+                    <ng-select  formControlName="cashFlowId" [items]="lstCashFlow" bindLabel="caption1" bindValue="cashFlowId" placeholder="Select CashFlow Caption"></ng-select>
+                    <ng-select  formControlName="cashFlowId" [items]="lstcashFlowModel"
+                    bindLabel="caption3" bindValue="id"
+                    placeholder="CashFlow Caption"></ng-select>
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label>Balance Notes</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control"  formControlName="balNotes" placeholder="Balance Notes">
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label>Income Notes</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" formControlName="incomeNotes"  placeholder="Income Notes">
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label>Notes Accounts</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" formControlName="notesAccounts" placeholder="Notes Accounts">
+                </div>
+            </div>
+            <div class="row mb-2" >
+                <div class="col-md-3 ml-2">
+                    <label>Notes Caption</label>
+                </div>
+                <div class="col-md-8">
+                    <input class="form-control" formControlName="notesCaption" placeholder="Notes Caption">
+                </div>
+            </div>
+        </form>
+            <div class="row card-header" style="border:none;">
+                <div class="col-md-9 mt-2 mb-5" style="margin-left:26%">
+                    <button type="submit" class="btn btn-success ml-2" 
+                    style="padding-left:5%; padding-right:5%" (click)="saveLowerGroups()"> Save</button>
+                    <button type="reset" class="btn btn-primary" style="padding-left:5%; padding-right:5%;margin-left: 1%;">Reset</button>
+                </div>
+            </div>
+    </div>
+</ng-template>

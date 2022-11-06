@@ -1,0 +1,60 @@
+<sidenav [orientation]="orientation">
+    <div class="sidenav-inner d-flex  justify-content-between align-items-center" style="background-color:#06283D;" [ngClass]="{ 'py-1': orientation !== 'horizontal' }">
+        <div class="d-flex  justify-content-between align-items-center">
+        <span class="app-brand-logo">
+            <img height="40" width="40" src="data:image/jpg;base64" alt="logo">
+        </span>
+        <sidenav-router-link icon="" class="mr-auto"  route="/" >{{companyName}} - Head Office
+        </sidenav-router-link>
+        </div>
+    <ng-container *ngFor="let subModule of lstModulesModel.subModules">
+        <sidenav-menu *ngIf="subModule.id!=19 || (subModule.id==19 && innerWidth>768)" icon="" [text]="subModule.name"
+            [active]="isMenuActive('/'+subModule.moduleRoutePath+'/'+subModule.moduleRoutePath+'/')" [open]="isMenuOpen('/'+lstModulesModel.moduleRoutePath+'/'+subModule.moduleRoutePath+'/')"
+            >
+
+        
+            <sidenav-router-link *ngFor="let subPage of subModule.pages;"
+                [route]="'/'+lstModulesModel.moduleRoutePath+'/'+subModule.moduleRoutePath+'/'+subPage.pageRoutePath"
+                [active]="isMenuActive('/'+lstModulesModel.moduleRoutePath+'/'+subModule.moduleRoutePath+'/'+subPage.pageRoutePath)">
+                {{subPage.name}}</sidenav-router-link>
+    
+        </sidenav-menu>
+    
+    </ng-container>
+    <ng-container *ngFor="let page of pageList">
+    </ng-container>
+        <sidenav-router-link icon="" class="ml-auto"  >
+            Logout <span class="bg-dark p-2 ml-auto" style="text-decoration: none;">Amran Bhuiyan</span>
+        </sidenav-router-link>
+ </div>
+</sidenav> 
+<!-- 
+ <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#06283D;">
+    <div class="container-fluid">
+        <span class="app-brand-logo">
+            <img height="40" width="40" src="data:image/jpg;base64" alt="logo">
+        </span>
+        <sidenav-router-link icon="" class="mr-auto" route="/">{{companyName}} - Head Office
+        </sidenav-router-link>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngFor="let subModule of lstModulesModel.subModules">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{subModule.name}}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" *ngFor="let subPage of subModule.pages;">
+                        <li><a class="dropdown-item" href="#">{{subPage.name}}</a></li>
+                   
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>  -->

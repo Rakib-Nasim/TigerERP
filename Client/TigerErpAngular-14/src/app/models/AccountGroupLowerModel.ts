@@ -1,0 +1,30 @@
+export class AccountGroupLower {
+    id: number;
+    lowerGroupId: number;
+    midGroupId: number | null;
+    groupName: string | null;
+    compId: number;
+    groupNameAlias: string | null;
+    groupNameAliasSaikat: string | null;
+    amount: number | null;
+    accType: number | null;
+    balancesheetCaption: string | null;
+    profitLossCaption: string | null;
+    fundFlowCaption: string | null;
+    accountType: number | null;
+    balanceType: number | null;
+    balancesheetPrintOrder: number | null;
+    isActive: number | null;
+    isBank: number | null;
+    iSBankCash: number | null;
+    printorderGroup: number | null;
+    cashFlowId: number | null;
+    cashFlowPO: number | null;
+    trailBalancePrintOrder: number | null;
+    parentId: number | null;
+    isParent: number | null;
+    balNotes: string | null;
+    incomeNotes: string | null;
+    notesAccounts: string | null;
+    notesCaption: string | null;
+}

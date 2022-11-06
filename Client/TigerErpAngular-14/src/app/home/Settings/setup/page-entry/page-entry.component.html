@@ -1,0 +1,127 @@
+<section class="mt-5 mb-5">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-7">
+                <div class="input-group">
+                    <input id="house" class="form-control" type="text"  name="search" 
+                        autocomplete="off" placeholder="search Godown Name,Branch Name">
+                </div>
+            </div>
+                <div class="col-md-2">
+                </div>
+            <div class="col-md-3">
+                    <button class="btn btn-success mx-2" (click)="openModalForSave(modalForSave)"
+                        style="padding-left:8%;padding-right:8%; background-color: #256D85;"> <i class="fa-solid fa-plus"></i>
+                        Add
+                    </button>
+                    <button class="btn btn-success mx-2" > <i class="fa-regular fa-eye"></i> Pdf View
+                    </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-3">
+    <div class="container">
+    <div #tableListPdf class="tableListPdf" style="max-height: 450px; overflow:scroll;width: 100%;">
+        <table id="example" class="table table-striped" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Page Name</th>
+                    <th scope="col">Module Name</th>
+                    <th scope="col">Routh Path</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody  *ngIf="lstPage.length==0">
+                <tr>
+                    <td>No Data Found</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="lstPage.length>0">
+                <tr  *ngFor="let page of lstPage | filter:searchText" >
+                    <td>{{page.id}}</td>
+                    <td>{{page.name}}</td>
+                    <td>{{page.moduleName}}</td>
+                    <td>{{page.pageRoutePath}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <button class="btn btn-sm btn-info" 
+                                (click)="editPageById(page.id,modalForSave)"><i
+                                  class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</section>
+
+
+<ng-template #modalForSave>
+    <div class="row">
+        <div class="card  text-center" style="border:none">
+            <form [formGroup]="pageEntryForm">
+                <div class="card-header text-center pt-4 pb-4" style="border:none ;background-color:#F2F2F2 ">
+                    <h3>Page Entry</h3>
+                </div>
+                <div class="card-body" style="background-color:#F2F2F2">
+                    <div class="row">
+                        <div class="col-md-3 text-start">
+                            <Label>Module</Label>
+                        </div>
+                        <div class="col-md-8">
+                            <ng-select formControlName="moduleId" [items]="lstModel"
+                            bindLabel="name" bindValue="id"></ng-select>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-3 text-start">
+                            <Label>Page Name</Label>
+                        </div>
+                        <div class="col-md-8">
+                            <input formControlName="name" class="form-control" placeholder="Page Name">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-3 text-start">
+                            <Label>Route Path</Label>
+                        </div>
+                        <div class="col-md-8">
+                           <input formControlName="pageRoutePath" class="form-control" [placeholder]="'Route Path'">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-3 text-start">
+                            <Label>Serial No</Label>
+                        </div>
+                        <div class="col-md-8">
+                            <input formControlName="serialNo" class="form-control" placeholder="Serial No">
+                        </div>
+                    </div>
+                    <div class="row mt-4 ">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-8 text-start">
+                            <button class="btn btn-success" 
+                                style="padding-left:8%;padding-right:8%;" (click)="savePage()">
+                                Save 
+                            </button>
+                            <button class="btn btn-primary"
+                                style="margin-left:1%; padding-left:8%;padding-right:8%;"
+                                (click)="reset()">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
