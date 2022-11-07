@@ -29,6 +29,28 @@
                     <th style="width: 80px;">Action</th>
                 </tr>
             </thead>
+            <tbody>
+                <tr *ngFor="let val of lstOfbranch; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{val.name}}</td>
+                    <td>{{val.shortName}}</td>
+                    <td>{{val.contactNo}}</td>
+                    <td>{{val.address}}</td>
+                    <td>{{val.type}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <button class="btn btn-sm btn-info"><i
+                                        class="fa-solid fa-pen-to-square"></i></button>
+                            </div>
+                            <div class="col-sm-2" style="margin-left:10px;">
+                                <button class="btn btn-sm btn-danger" ><i
+                                        class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </section>
@@ -90,6 +112,16 @@
                         <ng-select formControlName="type" [items]="typelst"
                         bindLabel="name" bindValue="id" [placeholder]="'Select type'">
                         </ng-select>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <label>IsActive</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input formControlName="status" type="checkbox" >
                     </div>
                     <div class="col-md-2"></div>
                 </div>

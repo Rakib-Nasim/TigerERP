@@ -34,10 +34,15 @@ export class BranchEntryComponent implements OnInit {
   getAllBranch(){
     this._branchServices.getBranchByCompId(this.compId).subscribe((res:any)=>{
       this.lstOfbranch=res.response;
-      console.log("this.lstOfbranch",this.lstOfbranch);
     })
   }
   saveBranch(){
+    if(this.formVal.status==true){
+      this.formVal.status=1;
+    }
+    else{
+      this.formVal.status=0;
+    }
     this.branchModel=this.formVal;
     this._branchServices.saveBranch(this.branchModel).subscribe(res=>{
       if(res){
@@ -66,6 +71,7 @@ create(){
   shortName:[,[]],
   contactNo:[,[]],
   address:[,[]],
+  status:[1,[]],
 })
 }
 get f(){
