@@ -33,8 +33,7 @@ export class ReceiveChalanComponent implements OnInit {
   }
 
   getAllCustomerByCompId(){
-    this._accChartService.getAllAccChartByComp(202,4).subscribe(res=>{
-
+    this._accChartService.getAllAccChartByComp(202).subscribe(res=>{
     })
   }
 

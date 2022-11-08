@@ -29,7 +29,7 @@ namespace ModelClass.ERP.DTO
         public int? IsInventory { get; set; }
         public int? IsCostCenter { get; set; }
         public int? HeadGroupId { get; set; }
-        public string HeadGroupName { get; set; }
+        public string? HeadGroupName { get; set; }
         public int? BalanceType { get; set; }
         public int? IsActive { get; set; }
         public decimal? DepriciationRate { get; set; }
@@ -49,8 +49,8 @@ namespace ModelClass.ERP.DTO
         public int? IsIndependSubledger { get; set; }
         public int? SubLeadeger { get; set; }
         public int? IsEmployee { get; set; }
-        public string TIN { get; set; }
-        public string BIN { get; set; }
+        public string? TIN { get; set; }
+        public string? BIN { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public string UpdatedBy { get; set; }

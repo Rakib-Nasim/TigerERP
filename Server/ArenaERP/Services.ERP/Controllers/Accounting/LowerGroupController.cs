@@ -40,7 +40,7 @@ namespace Services.ERP.Controllers.Accounting
             }
         }
 
-        [HttpGet("GetAllAccountGroupLowerrByComp")]
+        [HttpGet("GetAllAccountGroupLowerrByComp/{compId}")]
         public async Task<IActionResult> GetAllAccountGroupLowerrByComp(int compId)
         {
             try

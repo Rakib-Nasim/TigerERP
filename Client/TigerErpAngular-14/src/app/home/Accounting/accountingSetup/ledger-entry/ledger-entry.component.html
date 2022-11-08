@@ -1,0 +1,197 @@
+<section class="mt-5 mb-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-7">
+                <div class="input-group">
+                    <input id="house" class="form-control" type="text" name="search" 
+                        autocomplete="off" placeholder="search Godown Name,Branch Name">
+                </div>
+            </div>
+                <div class="col-md-2">
+                </div>
+            <div class="col-md-3">
+                <button class="btn btn-success mx-2" (click)="openModalForSave(modalForSave)"
+                    style="padding-left:8%;padding-right:8%; background-color: #256D85;"> <i class="fa-solid fa-plus"></i>
+                    Add
+                </button>
+                <button class="btn btn-success mx-2" > <i class="fa-regular fa-eye"></i> Pdf View</button>
+            </div>
+        </div>
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>SL NO.</th>
+                    <th >Name</th>
+                    <th >Alias Name</th>
+                    <th >Balance</th>
+                    <th style="width: 80px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="lstOfledger.length==0">
+                    <td colspan="13" class="font-italic text-left">data not found</td>
+                </tr>
+                <tr *ngFor="let item of lstOfledger; let i=index" >
+                    <td>{{i+1}}</td>                    
+                    <td>{{item.accountName}}</td>                    
+                    <td>{{item.aliasName}}</td>                    
+                    <td>{{item.openningBalance}}</td>                    
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <button class="btn btn-sm btn-info">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-2" style="margin-left:5px;">
+                                <button class="btn btn-sm btn-danger" >
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section>
+    <ng-template #modalForSave>
+        <div class="container">
+            <form [formGroup]="ledgerForm">
+                <div class="card-header text-center pt-4 pb-4" style="border:none ;background-color:#F2F2F2 ">
+                    <h3>Ledger Entry</h3>
+                </div>
+                <div class="card-body" style="background-color:#F2F2F2">
+                    <div class="row mb-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label> Branch Name</label>
+                        </div>
+                        <div class="col-md-8">
+                            <ng-select formControlName="branchId" [items]="lstOfbranch" 
+                              bindLabel="name" bindValue="id" placeholder="Select Branch Name">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label>Account Group</label>
+                        </div>
+                        <div class="col-md-8">
+                            <ng-select formControlName="lowerGroupId" [items]="lstlowerGroup" 
+                                bindLabel="groupName" bindValue="lowerGroupId" placeholder="Select Account Group">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label>Account Name/Code</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input formControlName="accountName" class="form-control"
+                             placeholder="Accounting Name" type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label>Alias Name</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input formControlName="aliasName" class="form-control"
+                             placeholder="Alias Name" type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label>Openning Balance</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input formControlName="openningBalance" class="form-control"
+                             placeholder="Openning Balance" type="number">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label>Currency Type</label>
+                        </div>
+                        <div class="col-md-8">
+                            <ng-select formControlName="currencyId" [items]="currency"
+                             bindLabel="sortName" bindValue="id"></ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label>Currency Rate</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input formControlName="currencyRate" class="form-control"
+                             placeholder="Currency Rate" type="number">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label>SubLedger</label>
+                        </div>
+                        <div class="col-md-8">
+                            <ng-select formControlName="subLeadeger" [items]="subLeadegerList"
+                             bindLabel="name" bindValue="id" placeholder="Select SubLedger"></ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-2 mt-4">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                            <label>Addtional</label>
+                        </div>
+                        <div class="col-md-8 row">
+                            <div class="col-md-4">
+                                <input formControlName="isCostCenter" type="checkbox"
+                                  id="costCenter">
+                                <label for="costCenter" style="margin-left:15px;">Cost Center</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input formControlName="isBillbyBill" type="checkbox"
+                                  id="isBillbyBill">
+                                <label for="isBillbyBill" style="margin-left:15px;">Bill by Bill</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input formControlName="isInventory" type="checkbox"
+                                  id="Inventory">
+                                <label for="Inventory" style="margin-left:15px;">Inventory</label>
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <input formControlName="isEmployee" type="checkbox"
+                                  id="isEmployee">
+                                <label for="isEmployee" style="margin-left:15px;">isEmployee</label>
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <input formControlName="status" type="checkbox"
+                                  id="status">
+                                <label for="status" style="margin-left:15px;">IsActive</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-8 text-start">
+                            <button class="btn btn-success" (click)="saveLedger()" style="padding-left:8%;padding-right:8%;"> Save</button>
+                            <button class="btn btn-primary" style="margin-left:1%; padding-left:8%;padding-right:8%;">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+</section>

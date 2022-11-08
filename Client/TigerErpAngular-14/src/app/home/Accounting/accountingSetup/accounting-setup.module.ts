@@ -10,9 +10,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { LedgerEntryComponent } from './ledger-entry/ledger-entry.component';
 
 @NgModule({
-  declarations: [LowerGroupComponent],
+  declarations: [LowerGroupComponent, LedgerEntryComponent],
   imports: [
     CommonModule,
     AccountingSetupRoutingModule,

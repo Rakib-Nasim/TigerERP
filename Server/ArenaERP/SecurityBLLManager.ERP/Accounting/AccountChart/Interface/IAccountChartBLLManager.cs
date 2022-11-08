@@ -10,7 +10,7 @@ namespace SecurityBLLManager.ERP.Accounting.AccountChart.Interface
     public  interface IAccountChartBLLManager
     {
         Task<bool> AddAccChart(AccChartViewModel model);
-        Task<IEnumerable<AccChartViewModel>> GetAllAccChartByComp(int compId,int ? lowerGroupId);
+        Task<IEnumerable<AccChartViewModel>> GetAllAccChartByComp(int compId);
         Task<AccChartViewModel> GetAccChartById(int Id);
         Task<bool> DeleteAccChart(int deleteId);
     }

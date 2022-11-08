@@ -16,7 +16,7 @@ namespace Services.ERP.Controllers.Accounting
             _bLLManager = bLLManager;
         }
 
-        [HttpPost]
+        [HttpPost("AddAccChart")]
 
         public async Task<IActionResult> AddAccChart(AccChartViewModel model)
         {
@@ -32,12 +32,12 @@ namespace Services.ERP.Controllers.Accounting
             }
         }
 
-        [HttpGet("GetAllAccChartByComp/compId/{compId}/lowerGroup/{lowerGroup?}")]
-        public async Task<IActionResult> GetAllAccChartByComp(int compId,int? lowerGroup)
+        [HttpGet("GetAllAccChartByComp/{compId}")]
+        public async Task<IActionResult> GetAllAccChartByComp(int compId)
         {
             try
             {
-                var result = await  _bLLManager.GetAllAccChartByComp(compId,lowerGroup);
+                var result = await  _bLLManager.GetAllAccChartByComp(compId);
                 return Ok(result);
             }
             catch (Exception ex)

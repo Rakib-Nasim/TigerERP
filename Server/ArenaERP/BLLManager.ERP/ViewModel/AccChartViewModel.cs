@@ -15,10 +15,10 @@ namespace ModelClass.ERP.ViewModel
         public int CompId { get; set; }
         public int? BranchId { get; set; }
         public string AccountName { get; set; }
-        public string CompName { get; set; }
-        public string AccountNo { get; set; }
-        public string AccountNamed { get; set; }
-        public string AliasName { get; set; }
+        public string? CompName { get; set; }
+        public string? AccountNo { get; set; }
+        public string? AccountNamed { get; set; }
+        public string? AliasName { get; set; }
         public decimal? OpenningBalance { get; set; }
         public int? CurrencyId { get; set; }
         public int? AccType { get; set; }
@@ -27,13 +27,13 @@ namespace ModelClass.ERP.ViewModel
         public int? IsInventory { get; set; }
         public int? IsCostCenter { get; set; }
         public int? HeadGroupId { get; set; }
-        public string HeadGroupName { get; set; }
+        public string? HeadGroupName { get; set; }
         public int? BalanceType { get; set; }
         public int? IsActive { get; set; }
         public decimal? DepriciationRate { get; set; }
         public int? NoteToHeadId { get; set; }
         public int? AccountGroupId { get; set; }
-        public string AccountGroupName { get; set; }
+        public string? AccountGroupName { get; set; }
         public int? IsSalesAccount { get; set; }
         public decimal? CreditLimit { get; set; }
         public decimal? CurrencyRate { get; set; }
@@ -48,8 +48,8 @@ namespace ModelClass.ERP.ViewModel
         public int? IsIndependSubledger { get; set; }
         public int? SubLeadeger { get; set; }
         public int? IsEmployee { get; set; }
-        public string TIN { get; set; }
-        public string BIN { get; set; }
+        public string? TIN { get; set; }
+        public string? BIN { get; set; }
         public int? Status { get; set; }
     }
 }

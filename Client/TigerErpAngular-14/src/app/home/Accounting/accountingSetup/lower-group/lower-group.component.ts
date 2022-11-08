@@ -21,7 +21,7 @@ export class LowerGroupComponent implements OnInit {
   public lstaccountMidGroup:AccountGroupMidModel[];
   public lstcashFlowModel:CashFlowModel[];
   public accountlowerGroup:AccountGroupLower=new AccountGroupLower();
-  lstCashFlow:any[]=[];
+  public lstCashFlow:CashFlowModel[]=new Array<CashFlowModel>();
   public lstlowerGroup:AccountGroupLower[];
 
   constructor(
@@ -57,7 +57,6 @@ export class LowerGroupComponent implements OnInit {
   getAllLowerGroup(){
     this._lowerGroupService.getAllLowerGroup(this.compId).subscribe((res:any)=>{
       this.lstlowerGroup=res as AccountGroupLower[];
-      console.log("this.lstlowerGroup",this.lstlowerGroup);
     })
   }
 

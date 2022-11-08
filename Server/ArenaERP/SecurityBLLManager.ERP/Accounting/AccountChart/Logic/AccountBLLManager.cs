@@ -58,9 +58,9 @@ namespace SecurityBLLManager.ERP.Accounting.AccountChart.Logic
             }
         }
 
-        public async Task<IEnumerable<AccChartViewModel>> GetAllAccChartByComp(int compId, int? lowerGroupId)
+        public async Task<IEnumerable<AccChartViewModel>> GetAllAccChartByComp(int compId)
         {
-            IEnumerable<AccChartViewModel> models = await _contextDb.AccChart.Where(p => p.CompId == compId && p.LowerGroupId == lowerGroupId && p.Status == (int)Common.ERP.Enum.AvailableStatus.Active)
+            IEnumerable<AccChartViewModel> models = await _contextDb.AccChart.Where(p => p.CompId == compId  && p.Status == (int)Common.ERP.Enum.AvailableStatus.Active)
                .ProjectTo<AccChartViewModel>(_mapper.ConfigurationProvider)
                .ToListAsync();
             return models;

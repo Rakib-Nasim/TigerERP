@@ -14,7 +14,7 @@ export class LowerGroupService {
    return this.http.post(this.baseApiUrl+'AddLowerGroup/',model);
   }
 
-  getAllLowerGroup(id:number){
-   return this.http.get(this.baseApiUrl+'GetAllAccountGroupLowerrByComp/'+id);
+  getAllLowerGroup(compId:number){
+   return this.http.get(this.baseApiUrl+'GetAllAccountGroupLowerrByComp/'+compId);
   }
 }
